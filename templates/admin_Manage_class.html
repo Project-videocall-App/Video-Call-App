@@ -1,0 +1,46 @@
+{% include 'admin_header.html' %}
+<center>
+	<form method="post">
+	{% if data['department']%}
+	<h1>MANAGE CLASS</h1>
+	<table  class="table" style="width: 300px">
+		<tr>
+			<th>DEPARTMENT</th>
+			<td><select name="dep" style="color: black">
+				{% for row in data['department']%}
+				<option value="{{row['department_id']}}">{{row['department']}}</option>
+			{% endfor %}
+		</select></td>
+		</tr>
+		<tr>
+			<th>CLASS NAME</th>
+			<td><input type="text" required="" name="class" style="color: black"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-success"></td>
+		</tr>
+	</table>
+	{% if data['class']%}
+	<table  class="table" style="width: 600px">
+		<tr>
+			<th>SNO</th>
+			<th>DEPARTMENT</th>
+			<th>CLASS</th>
+		</tr>
+		{% for row in data['class']%}
+		<tr>
+			<td>{{loop.index}}</td>
+			<TD>{{row['department']}}</TD>
+			<td>{{row['class']}}</td>
+			<td><a href="?action=delete&id={{row['class_id']}}" class="btn btn-danger">DELETE</a></td>
+			<td><a href="admin_Assign_class_and_subject_for_staff?id={{row['class_id']}}" class="btn btn-success">ASSIGN STAFF</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	{% else %}
+	<H1>!! NO DEPARTMENTS REGISTERED YET !!</H1>
+	{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %}

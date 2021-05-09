@@ -1,0 +1,30 @@
+{% include 'admin_header.html' %}
+<center>
+	<form method="post">
+		<h1>MANAGE DEPARTMENTS</h1>
+		<table  class="table" style="width: 300px">
+			<tr>
+				<th><input type="text" name="dep" placeholder="DEPARTMENT NAME" style="color: black"></th>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% if data['department']%}
+		<h1>ADDED DEPARTMENTS</h1>
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>SNO</th>
+				<th>DEPARTMENT NAME</th>
+			</tr>
+			{% for row in data['department']%}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['department']}}</td>
+				<td><a href="?action=delete&id={{row['department_id']}}" class="btn btn-danger">DELETE</a></td>
+				<td><a href="admin_Manage_staff?id={{row['department_id']}}" class="btn btn-success">ADD STAFF</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %}

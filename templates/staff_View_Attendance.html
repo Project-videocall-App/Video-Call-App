@@ -1,0 +1,25 @@
+{% include 'staff_header.html' %}
+<center>
+	<form method="post">
+		<h1>STUDENT ATTENDENCE</h1>
+		{% if data['attendance']%}
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>SNO</th>
+				<th>CLASS</th>
+				<th>STUDENT NAME</th>
+			</tr>
+			{% for row in data['attendance'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['class']}}</td>
+				<td>{{row['first_name']}}  {{row['last_name']}}</td>
+			</tr>			
+			{% endfor %}
+		</table>
+		{% else %}
+		<h1>!! NO DATA FOUND !!</h1>
+		{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %} 

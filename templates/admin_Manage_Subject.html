@@ -1,0 +1,30 @@
+{% include 'admin_header.html' %}
+<center>
+	<form method="post">
+		<h1>MANAGE SUBJECTS</h1>
+		<table  class="table" style="width: 300px">
+			<tr>
+				<th><input type="text" name="dep" placeholder="SUBJECT NAME"></th>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% if data['sub']%}
+		<h1>ADDED SUBJECTS</h1>
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>SNO</th>
+				<th>SUBJECT NAME</th>
+			</tr>
+			{% for row in data['sub']%}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td><a href="?action=delete&id={{row['subject_id']}}" class="btn btn-danger">DELETE</a></td>
+				
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %}

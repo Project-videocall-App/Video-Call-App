@@ -1,0 +1,257 @@
+{% include 'staff_header.html' %}
+<center>
+	<form method="post">
+		
+<script  type="text/javascript">
+function val()
+{
+  if(document.getElementById("fname").value=="")
+  {
+    alert("Enter Name!");
+    document.getElementById("fname").focus();
+      return false;
+  }
+  var a=document.getElementById("fname").value;
+  var b=a.substring(0,1);
+  alert(b);
+  if( /^[a-z]/.test( b) )
+  {
+    alert("First Letter must be capital!");
+    document.getElementById("fname").focus();
+      return false;
+  }
+  if(/[^a-z\s]/gi.test(document.getElementById("fname").value))
+  {
+    alert("Special characters not allowed in First Name");
+    document.getElementById("fname").focus();
+    return false;
+  }
+
+  if(document.getElementById("lname").value=="")
+  {
+    alert("Enter Last Name!");
+    document.getElementById("lname").focus();
+      return false;
+  }
+  if(/[^a-z\s]/gi.test(document.getElementById("lname").value))
+  {
+    alert("Special characters not allowed in Last Name");
+    document.getElementById("lname").focus();
+    return false;
+  }
+
+  if(document.getElementById("addr").value=="")
+  {
+    alert("Enter Address!");
+    document.getElementById("addr").focus();
+      return false;
+  }
+
+  if(document.getElementById("age").value=="")
+    {
+      alert("Enter Age!");
+      document.getElementById("age").focus();
+      return false;
+  }
+  if(/[^0-9\s]/gi.test(document.getElementById("age").value))
+  {
+    alert("Special characters not allowed in age");
+    document.getElementById("age").focus();
+    return false;
+  }
+  if((document.getElementById("age").value).length>2)
+  
+  {
+    alert("Age is not valid");
+    document.getElementById("age").focus();
+    return false;
+  }
+
+  if(document.getElementById("dist").value=="")
+  {
+    alert("Enter District!");
+    document.getElementById("dist").focus();
+      return false;
+  }
+
+  if(document.getElementById("email").value=="")
+  {
+    alert("Enter your E-mail ID");
+    document.getElementById("email").focus();
+    return false;
+  }
+  var emailPat =/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  var emailid=document.getElementById("email").value;
+  var matchArray = emailid.match(emailPat);
+  if (matchArray == null)
+  {
+    alert("Your Email ID seems incorrect. Enter Correct Email ID.");
+    document.getElementById("email").focus();
+    return false;
+  }
+
+  if(document.getElementById("mn").value=="")
+    {
+      alert("Enter Phone Number!");
+      document.getElementById("mn").focus();
+      return false;
+  }
+  if(/[^0-9\s]/gi.test(document.getElementById("mn").value))
+  {
+    alert("Special characters not allowed in Phone Number");
+    document.getElementById("mn").focus();
+    return false;
+  }
+  if((document.getElementById("mn").value).length<10)
+  
+  {
+    alert("Phone number is not valid");
+    document.getElementById("mn").focus();
+    return false;
+  }
+  if((document.getElementById("mn").value).length>15)
+  
+  {
+    alert("Phone number is not valid");
+    document.getElementById("mn").focus();
+    return false;
+  }
+
+  if(document.getElementById("uname").value=="")
+    {
+      alert("Enter User Name!");
+      document.getElementById("uname").focus();
+      return false;
+  }
+
+  if(document.getElementById("pwd").value=="")
+  {
+    alert("Enter Password!");
+    document.getElementById("pwd").focus();
+      return false;
+  }
+  if(document.getElementById("pwd").value.length<6)
+  {
+    alert("Password is too short..Password should have atleast 6 characters...");
+    document.getElementById("pwd").focus();
+      return false;
+  }
+  
+  }
+</script>
+
+
+
+
+
+<CENTER>
+	<form method="post">
+		<h1><u><b>MANAGE STUDENT</b></u></h1>
+		{% if data['student_up']%}
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="fname"  id="fname" value="{{data['student_up'][0]['first_name']}}"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="lname" id="lname" value="{{data['student_up'][0]['last_name']}}"  class="form-control" ></td>
+			</tr>
+			
+			
+			<tr>
+				<th>GENDER</th>
+				{% if data['student_up'][0]['gender']=='Male' %}
+				<td><input type="radio" checked="" name="gender" value="Male">Male
+					<input type="radio" name="gender" value="Female">Female</td>
+					{% else %}
+					<td><input type="radio" checked="" name="gender" value="Male">Male
+					<input type="radio" name="gender" value="Female">Female</td>
+					{% endif %}
+			</tr>
+			
+			
+			
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="phno" id="mn" value="{{data['student_up'][0]['phone']}}"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input type="email" name="email"  id="email" value="{{data['student_up'][0]['email']}}"  class="form-control" ></td>
+			</tr>
+			
+			<TR>
+				<td colspan="2" align="center"><input type="submit" name="updatez" value="UPDATE"  class="btn btn-success"></td>
+			</TR>
+		</table>
+		{% else %}
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="fname"  id="fname"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="lname" id="lname"  class="form-control" ></td>
+			</tr>
+			
+			<tr>
+				<th>GENDER</th>
+				<td><input type="radio" checked="" name="gender" value="Male">Male
+					<input type="radio" name="gender" value="Female">Female</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="phno" id="mn"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input type="email" name="email"  id="email"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>USER NAME</th>
+				<td><input type="text" name="uname" id="uname"  class="form-control" ></td>
+			</tr>
+			<tr>
+				<th>PASSWORD</th>
+				<td><input type="password" name="pwd" id="pwd"  class="form-control" ></td>
+			</tr>
+			<TR>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="REGISTER"  class="btn btn-success"></td>
+			</TR>
+		</table>
+		{% endif %}
+		{% if data['students']%}
+		<h1><u><b>REGISTERED STUDENT</b></u></h1>
+		<table  class="table" style="width: 600px"  class="table" style="width: 900px;">
+			<tr>
+				<th>SNO</th>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>GENDER</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['students'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['first_name']}}</td>
+				<td>{{row['last_name']}}</td>
+				<td>{{row['gender']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=delete&did={{row['login_id']}}&id={{data['id']}}" class="btn btn-danger">DELETE</a></td>
+				<td><a href="?action=update&did={{row['login_id']}}&id={{data['id']}}" class="btn btn-success">UPDATE</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</form>
+</CENTER>
+	</form>
+</center>
+{% include 'footer.html' %}

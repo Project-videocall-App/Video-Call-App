@@ -1,0 +1,25 @@
+{% include 'staff_header.html' %}
+<center>
+	<form method="post">
+		{% if data['assign']%}
+		<h1>ASSIGNED CLASS</h1>
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>SNO</th>
+				<th>SUBJECT</th>
+				<th>CLASS</th>
+			</tr>
+			{% for row in data['assign']%}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{row['class']}} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+		<h1>NO CLASS ASSIGNED</h1>
+		{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %}

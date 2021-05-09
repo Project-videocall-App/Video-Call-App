@@ -1,0 +1,53 @@
+{% include 'staff_header.html' %}
+<center>
+	<form method="post">
+		{% if data['class']%}
+		<h1>SHEDULE CLASS</h1>
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>CLASS</th>
+				<td><select name="clas" style="color: black">
+					{% for row in data['class']%}
+
+					<option value="{{row['class_id']}}">{{row['class']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>DATE</th>
+				<td><input type="datetime-local" name="date" style="color: black"></td>
+
+			</tr>
+			<tr>
+				<th>LINK</th>
+				<td><input type="text" name="link" style="color: black"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="ASSIGN" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% else %}
+		<h1>!! NO CLASSES ASSIGNED YET!!</h1>
+		{% endif %}
+		{% if data['shedule']%}
+		<table  class="table" style="width: 600px">
+			<tr>
+				<th>SNO</th>
+				<th>CLASS</th>
+				<th>DATE TIME</th>
+				<th>LINK</th>
+			</tr>
+			{% for row in data['shedule']%}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['class']}}</td>
+				<td>{{row['date_time']}}</td>
+				<td><a href="{{row['video_link']}}" class="btn btn-primary">{{row['video_link']}}</a></td>
+				<td><a href="?action=delete&did={{row['sh_class_id']}}" class="btn btn-danger">DELETE</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</form>
+</center>
+{% include 'footer.html' %}
